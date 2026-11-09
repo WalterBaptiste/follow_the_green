@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#050806">
+  <meta name="description" content="FOLLOW THE GREEN — un jeu à explorer avant la soirée Keep Hush × SPECTR au Karmen Camina, Strasbourg, le 20 novembre 2026.">
+  <title>FOLLOW THE GREEN — SPECTR × KEEP HUSH</title>
+  <link rel="preload" as="image" href="assets/scenes/courtyard.png">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="app" class="app-shell">
+    <section id="startScreen" class="start-screen" aria-labelledby="gameTitle">
+      <div class="start-noise" aria-hidden="true"></div>
+      <div class="start-copy">
+        <img class="start-logo" src="assets/logo-spectr-kh.png" alt="SPECTR × KEEP HUSH">
+        <h1 id="gameTitle">FOLLOW<br>THE <span>GREEN</span></h1>
+        <p class="intro-copy">17 h, Strasbourg. La jungle a repris la manufacture de tabac.<br>Un morceau passe, étouffé. Suis le vert.</p>
+        <button id="startButton" class="primary-button" type="button">ALLUMER LE SIGNAL</button>
+        <button id="silentButton" class="text-button" type="button">JOUER SANS LE SON</button>
+        <p class="tiny-copy">Un épisode Keep Hush × SPECTR · environ 5 minutes</p>
+      </div>
+    </section>
+
+    <section id="gameScreen" class="game-screen hidden" aria-label="Jeu">
+      <header class="hud">
+        <div class="hud-brand">FOLLOW THE GREEN</div>
+        <div class="hud-meter" aria-label="Niveau de signal">
+          <span>SIGNAL</span>
+          <div class="meter-track"><i id="signalFill"></i></div>
+        </div>
+        <button id="hintButton" class="hud-button" type="button" aria-label="Obtenir un indice">?</button>
+        <button id="soundButton" class="hud-button" type="button" aria-label="Couper ou activer le son">SON</button>
+      </header>
+
+      <div id="scene" class="scene scene-muted" role="group" aria-label="Décor interactif du jeu">
+        <div id="sceneImage" class="scene-image"></div>
+        <div class="green-wash" aria-hidden="true"></div>
+        <div class="vignette" aria-hidden="true"></div>
+        <div class="scanlines" aria-hidden="true"></div>
+        <div id="hotspots" class="hotspots"></div>
+        <div id="blink" class="blink-layer" aria-hidden="true"></div>
+        <div id="transition" class="transition-layer" aria-hidden="true"></div>
+        <div id="sceneTag" class="scene-tag"></div>
+        <div id="inventoryTray" class="inventory-tray" aria-label="Inventaire"></div>
+      </div>
+
+      <section id="dialogue" class="dialogue" aria-live="polite">
+        <div class="dialogue-head">
+          <span id="chapterLabel">RÉVEIL</span>
+          <span id="clueLabel">0 DÉCOUVERTE</span>
+        </div>
+        <p id="dialogueText"></p>
+        <div id="choices" class="choices"></div>
+      </section>
+    </section>
+
+    <section id="resultScreen" class="result-screen hidden" aria-labelledby="resultTitle">
+      <div class="result-backdrop"></div>
+      <div class="result-overlay"></div>
+      <div class="result-content">
+        <p class="eyebrow">TA FAÇON DE SUIVRE LE SIGNAL</p>
+        <h2 id="resultTitle"></h2>
+        <p id="resultStory" class="result-story"></p>
+        <div class="result-score">
+          <strong id="resultScore">0%</strong>
+          <span>RÉSONANCE</span>
+        </div>
+        <dl class="result-details">
+          <div><dt>DÉCOUVERTES</dt><dd id="resultDiscoveries"></dd></div>
+          <div><dt>AFFICHES</dt><dd id="resultPosters"></dd></div>
+          <div><dt>OBJETS</dt><dd id="resultObjects"></dd></div>
+          <div><dt>CHEMIN</dt><dd id="resultRoute"></dd></div>
+          <div><dt>TEMPS</dt><dd id="resultTime"></dd></div>
+        </dl>
+        <p class="final-line">Tout le monde entendait le même morceau.<br><b>Personne n’a suivi le même chemin.</b></p>
+        <section class="rdv-card" aria-label="Informations sur la soirée">
+          <img class="rdv-logo" src="assets/logo-keephush.png" alt="Keep Hush">
+          <h3>RENDEZ-VOUS LE 20 NOVEMBRE</h3>
+          <p><b>KARMEN CAMINA</b> · Strasbourg, Krutenau</p>
+          <ul>
+            <li><b>17 h</b> ouverture des portes (entrées bar)</li>
+            <li><b>19 h – 21 h</b> bar : SPECTR « From Soul to Jungle », accès libre</li>
+            <li><b>22 h – 4 h</b> Room Gallery : DRIIA · Noli (live alto) · Aoûj &amp; Señorita · GTK · SPECTR Take Over</li>
+          </ul>
+          <p>Préventes à 13,50 € · 15,50 € · 17,50 €, au choix et sans justificatif. +18 ans.</p>
+        </section>
+        <div class="result-actions">
+          <a id="ticketButton" class="primary-button" href="https://shotgun.live/events/keep-hush-x-spectr-w-driia-uk-noli-uk-more" target="_blank" rel="noopener">RÉSERVER MA PLACE</a>
+          <button id="shareButton" class="secondary-button" type="button">CRÉER MA STORY</button>
+          <button id="replayButton" class="secondary-button" type="button">REJOUER</button>
+        </div>
+        <p id="shareStatus" class="share-status" aria-live="polite"></p>
+        <p class="event-line">SPECTR × KEEP HUSH · KARMEN CAMINA · 20.11.2026</p>
+        <p class="credit">♪ MJ COLE — SINCERE (DRIIA EDIT)</p>
+      </div>
+    </section>
+
+    <div id="posterModal" class="poster-modal hidden" role="dialog" aria-modal="true" aria-labelledby="posterTitle">
+      <article class="poster-card">
+        <h2 id="posterTitle" class="poster-head"></h2>
+        <p id="posterTag" class="poster-tag"></p>
+        <p id="posterText"></p>
+        <p id="posterCount" class="poster-count"></p>
+        <button id="posterClose" class="primary-button" type="button">FERMER</button>
+      </article>
+    </div>
+    <canvas id="storyCanvas" width="1080" height="1920" hidden></canvas>
+  </main>
+
+  <script src="game.js" defer></script>
+</body>
+</html>
